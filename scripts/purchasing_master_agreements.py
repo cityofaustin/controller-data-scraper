@@ -46,7 +46,7 @@ def compare(new_rows, existing_rows, key='TASK_ORDER'):
 
 
 def main():
-    html = get_html(ENDPOINT)
+    html = get_html(MASTER_AGREEMENTS_ENDPOINT)
     rows = handle_html(html)
     data = handle_rows(headers=rows[0], rows=rows[1:])
     pdb.set_trace()
