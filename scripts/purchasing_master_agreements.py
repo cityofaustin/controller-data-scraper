@@ -9,6 +9,16 @@ import requests
 from config import *
 
 
+def to_csv(rows, fieldnames=[], filename='data.csv', header=True):
+    with open(filename, 'w', newline='\n') as outfile:
+        writer = csv.DictWriter(outfile, fieldnames=fieldnames)
+        
+        if header:
+            writer.writeheader()
+            
+        writer.writerows(dic)
+
+
 def get_html(url, dept=2400):
     form_data = {'selauth' : 2400 }
     res = requests.post(url, data=form_data)
@@ -40,11 +50,6 @@ def handle_rows(headers=None, rows=None):
     return handled
 
 
-def compare(new_rows, existing_rows, key='TASK_ORDER'):
-    existing_ids = [str(row[key]) for row in existing_rows]
-    return [row for row in new_rows if str(row[key]) not in existing_ids]
-
-
 def main():
     html = get_html(MASTER_AGREEMENTS_ENDPOINT)
     rows = handle_html(html)
@@ -60,5 +65,18 @@ if __name__=='__main__':
 
     except Exception as e:        
         raise e
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
