@@ -20,7 +20,7 @@ def to_csv(rows, fieldnames=[], filename='data.csv', header=True):
 
 
 def get_html(url, dept=2400):
-    form_data = {'selauth' : 2400 }
+    form_data = {'selauth' : dept }
     res = requests.post(url, data=form_data)
     res.raise_for_status()
     return res.text
